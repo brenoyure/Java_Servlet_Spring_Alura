@@ -1,7 +1,6 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,23 +16,22 @@ public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		PrintWriter out = resp.getWriter();
-		String nomeDaEmpresa = req.getParameter("nome");
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		String nomeDaEmpresa = request.getParameter("nome");
+
 		Empresa empresa = new Empresa();
 		empresa.setNome(nomeDaEmpresa);
-		
+
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
-		
-		
-		out.println("<html>  <head> <title>Cadastro Realizado</title> </head>  <body> <h2> Empresa " + nomeDaEmpresa + " cadastrada com sucesso.</h2>  </body></html>");
-		
-		
+
+		request.setAttribute("nome-da-empresa", empresa.getNome());
+		request.getRequestDispatcher("/novaEmpresaCadastrada.jsp").forward(request, response);
+
 		System.out.println("Empresa " + nomeDaEmpresa + " cadastrada com sucesso.");
-		
+
 	}
 
 }

@@ -1,8 +1,8 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -17,24 +17,22 @@ public class NovaEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-	
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		System.out.println("Cadastrando nova empresa");
-		
-		
-		String nomeDaEmpresa = req.getParameter("nome");
+
+		String nomeDaEmpresa = request.getParameter("nome");
 		Empresa empresa = new Empresa();
 		empresa.setNome(nomeDaEmpresa);
-		
+
 		Banco banco = new Banco();
 		banco.adiciona(empresa);
-		String empresas = banco.getEmpresas().toString();
-		
-		
-		PrintWriter out = resp.getWriter();
-		out.println("<html><body> Empresa " + nomeDaEmpresa + " cadastrada com sucesso. <p>" + empresas + "</p> </body></html>");
-		
-		
+
+		request.setAttribute("empresa", empresa.getNome());
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/novaEmpresaCriada.jsp");
+		requestDispatcher.forward(request, response);
+
 	}
 
 }
