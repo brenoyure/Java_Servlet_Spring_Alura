@@ -1,13 +1,5 @@
-<%@page import="br.com.alura.gerenciador.servlet.Empresa"%>
-<%@page import="java.util.List"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%
-
-	List<Empresa> lista = (List<Empresa>)request.getAttribute("empresas");
-
-%>   
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
  
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -20,14 +12,15 @@
 	</head>
 		<body>
 
+			<h2>Lista das Empresas</h2>
 				<ul>
-					<%
-						for (Empresa empresa : lista) {
-					%>		
-						<li><%=empresa.getNome() %>	</li>
-					<%	
-						}
-					%>
+					<c:forEach items="${empresas}" var="empresa" >
+					<fmt:formatDate value="${empresa.dataDeAbertura}" pattern="dd/MM/yyyy" var="data"/>
+					
+						<li>${empresa} - ${data}</li>	
+					
+					
+					</c:forEach>
 				</ul>
 
 

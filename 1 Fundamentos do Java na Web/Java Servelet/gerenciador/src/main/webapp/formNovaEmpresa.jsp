@@ -11,20 +11,15 @@
 
 <body>
 
+	<h2>Formulário para abertura de nova Empresa</h2>
 
 	<form action="${linkServletNovaEmpresa}" method="post">
 
-		Nome: <input type="text" name="nome"> <input type="submit" />
-
-
-
-
-
-
-
-
-
-
+		Nome: <input type="text" name="nome">
+		<br> <br/> 
+		Data de Abertura: <input type="text" name="data" >
+		
+		<input type="submit"/>
 
 
 	</form>
