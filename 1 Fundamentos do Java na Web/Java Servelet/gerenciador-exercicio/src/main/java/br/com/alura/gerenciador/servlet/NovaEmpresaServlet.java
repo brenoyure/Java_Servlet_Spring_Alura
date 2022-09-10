@@ -29,11 +29,11 @@ public class NovaEmpresaServlet extends HttpServlet {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			dataDeAbertura = sdf.parse(parametroDataDeAbertura);
-			
+
 		} catch (ParseException e) {
 			throw new ServletException(e);
 		}
-		
+
 		Empresa empresa = new Empresa();
 		empresa.setNome(nomeDaEmpresa);
 		empresa.setDataDeAbertura(dataDeAbertura);
@@ -43,10 +43,19 @@ public class NovaEmpresaServlet extends HttpServlet {
 
 		request.setAttribute("nomeDaEmpresa", empresa.getNome());
 		request.setAttribute("dataDeAbertura", dataDeAbertura);
-		request.getRequestDispatcher("/novaEmpresaCriada.jsp").forward(request, response);
+
+		response.sendRedirect("listaEmpresas");
 
 		System.out.println("Empresa " + nomeDaEmpresa + " cadastrada com sucesso.");
 
+	}
+
+	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
+
+		response.sendRedirect("listaEmpresas");		
+		
 	}
 
 }

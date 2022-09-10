@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<fmt:formatDate var="dataDeAbertura" value="${dataDeAbertura}"/>
 
 <html>
     <head>
@@ -9,6 +10,13 @@
     </head>
 
 		<body>
+		
+		
+			<c:if test="${not empty empresa}">
+				Empresa ${empresa} cadastrada com sucesso.
+				<br>
+				Cadastro realizado na data de: ${dataDeAbertura}
+			</c:if>
                
             
             <h2>Lista de Empresas </h2>
