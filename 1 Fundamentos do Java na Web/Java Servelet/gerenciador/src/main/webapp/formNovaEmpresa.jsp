@@ -1,11 +1,13 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:url value="/novaEmpresa" var="linkServletNovaEmpresa"/>
+<c:url value="/listaEmpresas" var="linkServletListaEmpresas"/>
 
 <!DOCTYPE html>
 <html>
 
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Formulário Nova Empresa</title>
 </head>
 
@@ -23,6 +25,9 @@
 
 
 	</form>
+
+	<p>Para listar/editar as empresas clique <a href="${linkServletListaEmpresas}">aqui</a>.</p>
+
 
 </body>
 

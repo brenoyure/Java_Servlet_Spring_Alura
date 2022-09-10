@@ -5,7 +5,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -23,43 +22,39 @@ public class NovaEmpresaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		System.out.println("Cadastrando nova empresa");
-
 		String nomeDaEmpresa = request.getParameter("nome"); 		// Recebendo o Nome da Empresa via request HTTP
 		String paramDataDeAbertura = request.getParameter("data");	// Recebendo a Data de Abertura via request HTTP
-		Date dataDeAbertura = null;									// Inicializando uma Date como null
-		
+		Date dataDeAbertura = null; 								// Inicializando uma Date como null
+
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
 			dataDeAbertura = sdf.parse(paramDataDeAbertura);
-		} catch (ParseException e) {
-			throw new ServletException(e);
+
+			Empresa empresa = new Empresa();
+			empresa.setNome(nomeDaEmpresa);
+			empresa.setDataAbertura(dataDeAbertura);
+
+			new Banco().adiciona(empresa);
+
+			System.out.println("Cadastrando nova empresa");
+			request.setAttribute("empresa", empresa.getNome());
+			request.setAttribute("dataDeAbertura", empresa.getDataAbertura());
+
+			response.sendRedirect("listaEmpresas");
+
+		} catch (NullPointerException | IllegalArgumentException | ParseException e) {
+			System.err.println(e.getLocalizedMessage());
+			response.sendRedirect("listaEmpresas");
 		}
 
-		Empresa empresa = new Empresa();
-		empresa.setNome(nomeDaEmpresa);
-		empresa.setDataAbertura(dataDeAbertura);
-
-		Banco banco = new Banco();
-		banco.adiciona(empresa);
-
-		request.setAttribute("empresa", empresa.getNome());
-		request.setAttribute("dataDeAbertura", empresa.getDataAbertura());
-
-		response.sendRedirect("listaEmpresas");
-		
-		
-//		RequestDispatcher requestDispatcher = request.getRequestDispatcher("/listaEmpresas");
-//
-//		requestDispatcher.forward(request, response);
-		
 	}
-	
+
 	@Override
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		response.sendRedirect("listaEmpresas");
-	
+
 	}
 
 }

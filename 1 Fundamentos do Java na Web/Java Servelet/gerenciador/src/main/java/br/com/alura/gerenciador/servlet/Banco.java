@@ -2,6 +2,7 @@ package br.com.alura.gerenciador.servlet;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -28,6 +29,7 @@ public class Banco {
 	public void adiciona(Empresa empresa) {
 		empresa.setId(numeroIdentificador++);
 		Banco.empresas.add(empresa);
+
 	}
 
 	public void remove(Integer id) {
@@ -42,6 +44,29 @@ public class Banco {
 
 	public List<Empresa> getEmpresas() {
 		return Collections.unmodifiableList(Banco.empresas);
+	}
+
+	public Empresa buscaEmpresaPelaID(Integer id) {
+		for (Empresa empresa : Banco.empresas) {
+			if (empresa.getId() == id)
+				return empresa;
+		}
+		return null;
+
+	}
+
+	public void editarEmpresaPeloID(Integer id, String nomeDaEmpresa, Date dataDeAbertura) {
+
+		try {
+			Empresa empresa = this.buscaEmpresaPelaID(id);
+			empresa.setNome(nomeDaEmpresa);
+			empresa.setDataAbertura(dataDeAbertura);
+		
+		} catch (NullPointerException e) {
+			System.err.println("Empresa não encontrada.");			
+		}
+		
+
 	}
 
 }
