@@ -11,48 +11,41 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class NovaEmpresaServlet
+ * Servlet implementation class EditarEmpresa
  */
-@WebServlet("/novaEmpresa")
-public class NovaEmpresaServlet extends HttpServlet {
+@WebServlet("/EditarEmpresa")
+public class EditarEmpresaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
-		String nomeDaEmpresa = request.getParameter("nome");
-
 		try {
-			Empresa empresa = new Empresa();
+			Empresa empresa = new Banco().buscaPeloID(Integer.valueOf(request.getParameter("id")));
 			empresa.setNome(request.getParameter("nome"));
 			empresa.setDataDeAbertura(new SimpleDateFormat("dd/MM/yyyy").parse(request.getParameter("data")));
-
-			new Banco().adiciona(empresa);
-
-			request.setAttribute("nomeDaEmpresa", empresa.getNome());
-
 			response.sendRedirect("listaEmpresas");
-
-			System.out.println("Empresa " + nomeDaEmpresa + " cadastrada com sucesso.");
-
-		} catch (NullPointerException | IllegalArgumentException e) {
-			System.err.println(e.getLocalizedMessage());
-			response.sendRedirect("formNovaEmpresa.jsp");
+			System.out.println("Dados da Empresa Alterados para " + empresa.getNome() + " através do IP: "
+					+ request.getRemoteHost());
 
 		} catch (ParseException e) {
-			System.err.println("Formato de Data em branco ou não suportado: " + request.getParameter("data"));
-			response.sendRedirect("formNovaEmpresa.jsp");
+			System.err.println("Formato de Data não suportado.");
+			response.sendRedirect("listaEmpresas");
+
+		} catch (NumberFormatException e) {
+			System.err.println("Campo ID em branco, ou formato não suportado.");
+			response.sendRedirect("listaEmpresas");
 		}
 
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
+			throws ServletException, IOException {
 
 		System.err.println(
-				"IP: " + request.getRemoteHost() + " -> Acesso ao servlet atual via método http-get não permitido.");
+				"IP: " + request.getRemoteHost() + " -> Acesso via método http-get não permitido ao servlet atual.");
 		response.sendRedirect("listaEmpresas");
 
 	}
