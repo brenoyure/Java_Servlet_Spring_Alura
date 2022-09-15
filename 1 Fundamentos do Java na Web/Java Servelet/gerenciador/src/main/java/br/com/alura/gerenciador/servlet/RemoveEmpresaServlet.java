@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/excluirEmpresa")
+import br.com.alura.gerenciador.modelo.Banco;
+
+//@WebServlet("/excluirEmpresa")
 public class RemoveEmpresaServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
@@ -26,9 +28,9 @@ public class RemoveEmpresaServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		response.sendRedirect("listaEmpresas");
-		
+
 	}
-	
+
 }

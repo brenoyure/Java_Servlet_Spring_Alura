@@ -1,9 +1,8 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class Banco {
@@ -33,13 +32,14 @@ public class Banco {
 	}
 
 	public void remove(Integer id) {
-		Iterator<Empresa> it = Banco.empresas.listIterator();
+		// Retorna a empresa que será removida através do ID
+		Empresa empresaQueSeraRemovida = this.buscaEmpresaPelaID(id);
 
-		while (it.hasNext()) {
-			if (it.next().getId() == id)
-				it.remove();
-		}
+		// Remove a empresa do ArrayList<T>
+		Banco.empresas.remove(empresaQueSeraRemovida);
 
+		// Anula a referência
+		empresaQueSeraRemovida = null;
 	}
 
 	public List<Empresa> getEmpresas() {
@@ -47,11 +47,8 @@ public class Banco {
 	}
 
 	public Empresa buscaEmpresaPelaID(Integer id) {
-		for (Empresa empresa : Banco.empresas) {
-			if (empresa.getId() == id)
-				return empresa;
-		}
-		return null;
+
+		return Banco.empresas.stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
 
 	}
 
@@ -61,11 +58,10 @@ public class Banco {
 			Empresa empresa = this.buscaEmpresaPelaID(id);
 			empresa.setNome(nomeDaEmpresa);
 			empresa.setDataAbertura(dataDeAbertura);
-		
+
 		} catch (NullPointerException e) {
-			System.err.println("Empresa não encontrada.");			
+			System.err.println("Empresa não encontrada.");
 		}
-		
 
 	}
 

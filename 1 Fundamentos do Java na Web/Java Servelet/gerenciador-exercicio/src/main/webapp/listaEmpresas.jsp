@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:url value="/RemoveEmpresa" var="remove" />
-<c:url value="/obterDadosEmpresa" var="editar" />
+<c:url value="/entrada?acao=MostraEmpresa" var="mostrar" />
 <c:url value="/formNovaEmpresa.jsp" var="formularioNovaEmpresa" />
  
 <!DOCTYPE html>
@@ -23,7 +23,8 @@
 					
 						<li>${empresa} - ${data} - 
 						
-						 <p align="justify"><a href="${editar}?id=${empresa.id}">Editar</a> <a href="${remove}?id=${empresa.id}">Remover</a> </p> 
+						 <p align="justify"><a href="${mostrar}&id=${empresa.id}">Editar</a> 
+						 <a href="${remove}?id=${empresa.id}">Remover</a> </p> 
 						
 						
 						

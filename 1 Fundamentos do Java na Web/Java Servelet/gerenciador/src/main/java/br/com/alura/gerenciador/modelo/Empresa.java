@@ -1,4 +1,4 @@
-package br.com.alura.gerenciador.servlet;
+package br.com.alura.gerenciador.modelo;
 
 import java.util.Date;
 
@@ -23,9 +23,9 @@ public class Empresa {
 	public void setNome(String nome) {
 		if (vazioOuNulo(nome))
 			throw new NullPointerException("Nome da Empresa não pode ser Nulo ou Vazio");
-		if(comecaComLetraMinuscula(nome))
+		if (comecaComLetraMinuscula(nome))
 			throw new IllegalArgumentException("Nome da Empresa deve começar com letra maiúscula.");
-		
+
 		this.nome = nome;
 	}
 
@@ -40,7 +40,7 @@ public class Empresa {
 	public String toString() {
 		return this.nome;
 	}
-	
+
 	private boolean comecaComLetraMinuscula(String nome) {
 		return nome.charAt(0) == nome.toLowerCase().charAt(0);
 	}
@@ -48,5 +48,5 @@ public class Empresa {
 	private boolean vazioOuNulo(String nome) {
 		return (nome == "" || nome == null);
 	}
-	
+
 }

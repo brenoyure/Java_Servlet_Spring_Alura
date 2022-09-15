@@ -1,7 +1,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-<c:url value="/editarEmpresa" var="linkServletEditarEmpresa"/>
+<c:url value="/entrada?acao=EditarEmpresa" var="linkServletEditarEmpresa"/>
+<c:url value="/entrada?acao=ListaEmpresas" var="linkServletListaEmpresas"/>
 <fmt:formatDate pattern="dd/MM/yyyy" var="data" value="${empresa.dataAbertura}"/>
 
 <!DOCTYPE html>
@@ -10,7 +11,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Formulário Nova Empresa</title>
+	<title>Formulário para Editar uma Empresa</title>
 </head>
 
 <body>
@@ -28,8 +29,9 @@
 		
 		<input type="submit"/>
 
-
 	</form>
+	
+	<p>Para listar/editar as empresas clique <a href="${linkServletListaEmpresas}">aqui</a>.</p>
 
 </body>
 
