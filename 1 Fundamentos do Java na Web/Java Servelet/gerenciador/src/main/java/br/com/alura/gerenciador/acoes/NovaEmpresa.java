@@ -15,13 +15,11 @@ import br.com.alura.gerenciador.modelo.Empresa;
 public class NovaEmpresa implements Acao {
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String nome = request.getParameter("nome");
 		String paramData = request.getParameter("data");
-
 		Date dataAbertura = null;
-		
 		
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
@@ -32,18 +30,16 @@ public class NovaEmpresa implements Acao {
 			empresa.setDataAbertura(dataAbertura);
 			
 			new Banco().adiciona(empresa);
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			
+			return "redirect:entrada?acao=ListaEmpresas";
 			
 			
 		} catch (IllegalArgumentException | ParseException e) {
 			System.err.println(e.getLocalizedMessage());
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			return "redirect:entrada?acao=ListaEmpresas";
 		}
 		
-		request.getParameter("data");
 		
-		
-
 	}
 
 }

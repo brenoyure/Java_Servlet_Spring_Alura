@@ -20,60 +20,64 @@ public class UnicaEntradaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	@Override
-	protected void service(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		String parametroAcao = request.getParameter("acao");
+		String nome = null;
 
 		switch (parametroAcao) {
+		
 		case "ListaEmpresas":
-			new ListaEmpresas().executa(request, response);
+			nome = new ListaEmpresas().executa(request, response);
 			break;
-			
+
 		case "NovaEmpresa":
-			new NovaEmpresa().executa(request, response);
+			nome = new NovaEmpresa().executa(request, response);
 			break;
-			
+
 		case "RemoveEmpresa":
-			new RemoveEmpresa().executa(request, response);
+			nome = new RemoveEmpresa().executa(request, response);
 			break;
 
 		case "MostraEmpresa":
-			new MostraEmpresa().executa(request, response);
+			nome = new MostraEmpresa().executa(request, response);
 			break;
-			
+
 		case "EditarEmpresa":
-			new EditarEmpresa().executa(request, response);
+			nome = new EditarEmpresa().executa(request, response);
 			break;
-			
+
 		default:
 			response.sendRedirect("entrada?acao=ListaEmpresas");
 			System.err.println("Parâmetro incorreto, voltando para a lista.");
-			
+
 			break;
 		}
+
+		/**
+		 * Variável "nome" recebe o retorno dos métodos executa das Classes que implementam a interface Ação.
+		 * 
+		 * Utilizamos o método .split() para separar a String em duas partes, divisão essa que nos devolve um vetor com duas posições: 
+		 * 
+		 * No lado esquerdo String[0],  
+		 * 		temos tipo => se é um DISPATCHER ou um REDIRECT
+		 * 
+		 * No lado direito String[1],
+		 * 		temos o "endereço", por assim dizer, 
+		 * 			que pode ser um JSP, ou alguma chamada para o servlet de entrada
+		 * 
+		 */
 		
+		String[] tipoEEndereco = nome.split(":");
+
+		if (tipoEEndereco[0].equals("dispatcher"))
+			request.getRequestDispatcher(tipoEEndereco[1]).forward(request, response);
 		
+		if (tipoEEndereco[0].equals("redirect"))
+			response.sendRedirect(tipoEEndereco[1]);
 		
+		System.out.println("Teste TIPO & Redirect " + tipoEEndereco[0] + ":" + tipoEEndereco[1]);
 		
-		
-		
-		
-//		if (parametroAcao.equalsIgnoreCase("ListaEmpresas")) {
-//			ListaEmpresas acao = new ListaEmpresas();
-//			acao.executa(request, response);
-//		}
-//		
-//		if (parametroAcao.equalsIgnoreCase("RemoveEmpresa")) {
-//			RemoveEmpresa acao = new RemoveEmpresa();
-//			acao.executa(request, response);
-//			
-//		}
-//
-//		if (parametroAcao.equalsIgnoreCase("MostraEmpresa")) {
-//			MostraEmpresa acao = new MostraEmpresa();
-//			acao.executa(request, response);
-//		}
 		
 	}
 

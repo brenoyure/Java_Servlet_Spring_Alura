@@ -11,7 +11,7 @@ import br.com.alura.gerenciador.modelo.Banco;
 public class RemoveEmpresa implements Acao {
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 			// Recebendo o parâmetro ID da Empresa, como String
 		String parametroID = request.getParameter("id");
@@ -24,8 +24,8 @@ public class RemoveEmpresa implements Acao {
 			// Instanciando o Banco & Chamado o Método para Remover
 			new Banco().remove(id);
 			
-			// Após a exclusão, redirecionando o usuário de volta para a lista.
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			// Após a exclusão, redirecionando o usuário de volta para a lista (servlet Entrada).
+			return "redirect:entrada?acao=ListaEmpresas";
 			
 		} catch (NumberFormatException e) {
 			/*
@@ -35,7 +35,7 @@ public class RemoveEmpresa implements Acao {
 
 			System.err.println("Formato de Número Inválido.");
 			System.out.println("Nenhuma Empresa Removida, registro do banco não afetado.");
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			return "redirect:entrada?acao=ListaEmpresa";
 		}
 
 	}
