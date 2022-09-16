@@ -1,6 +1,6 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:url value="/novaEmpresa" var="linkServletNovaEmpresa"/>
-<c:url value="/listaEmpresas" var="listarEmpresas"/>
+<c:url value="/entrada?acao=NovaEmpresa" var="linkServletNovaEmpresa"/>
+<c:url value="/entrada?acao=ListaEmpresas" var="listaEmpresas"/>
 
 <!DOCTYPE html>
 
@@ -28,7 +28,7 @@
 				
 				<h3>Outras Opções</h3>
 				
-					<p align="justify">Para listar as Empresas clique <a href="${listarEmpresas}">aqui</a></p>
+					<p align="justify">Para listar as Empresas clique <a href="${listaEmpresas}">aqui</a></p>
 				
 				
 			

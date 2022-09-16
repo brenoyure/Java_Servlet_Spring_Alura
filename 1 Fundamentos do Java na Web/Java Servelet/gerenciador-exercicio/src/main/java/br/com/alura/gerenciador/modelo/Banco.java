@@ -40,23 +40,13 @@ public class Banco {
 	
 	public void remove(Integer id) {
 
-		Iterator<Empresa> it = Banco.empresas.iterator();
-
-		while (it.hasNext()) {
-			if (it.next().getId() == id)
-				it.remove();
-
-		}
+		Banco.empresas.remove(this.buscaPeloID(id));
 
 	}
 
 	public Empresa buscaPeloID(Integer id) {
-		for(Empresa e : Banco.empresas) {
-			if (e.getId() == id)
-				return e;
-		}
 		
-		return null;
+		return Banco.empresas.stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
 		
 	}
 	
