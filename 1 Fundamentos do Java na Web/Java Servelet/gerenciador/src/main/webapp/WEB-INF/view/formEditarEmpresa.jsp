@@ -23,7 +23,7 @@
 		Nome: <input type="text" name="nome" value="${empresa.nome}">
 		<br> <br/> 
 		
-		Data de Abertura: <input type="text" name="data" value="${data}" >
+		Data de Abertura: <input type="text" name="data" value="${data}" placeholder = "Formato: 01/08/2022" >
 		
 		<input type="hidden" name="id" value="${empresa.id}" >
 		

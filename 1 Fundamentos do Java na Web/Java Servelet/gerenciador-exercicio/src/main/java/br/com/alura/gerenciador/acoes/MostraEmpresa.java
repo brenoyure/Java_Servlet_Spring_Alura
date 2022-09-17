@@ -1,6 +1,7 @@
 package br.com.alura.gerenciador.acoes;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +13,7 @@ import br.com.alura.gerenciador.modelo.Empresa;
 public class MostraEmpresa implements Acao {
 
 	@Override
-	public void executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		try {
 			Integer id = Integer.valueOf(request.getParameter("id"));
@@ -20,11 +21,13 @@ public class MostraEmpresa implements Acao {
 			Empresa empresa = new Banco().buscaPeloID(id);
 			
 			request.setAttribute("empresa", empresa);
-			request.getRequestDispatcher("/formEditarEmpresa.jsp").forward(request, response);
+			
+			return "forward:formEditarEmpresa.jsp";
 
-		} catch (NumberFormatException e) {
+		} catch (NoSuchElementException | NumberFormatException e) {
 			System.err.println(e.getLocalizedMessage());
-			response.sendRedirect("entrada?acao=ListaEmpresas");
+			return "redirect:entrada?acao=ListaEmpresas";
+			
 		}
 
 	}

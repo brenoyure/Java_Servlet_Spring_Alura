@@ -4,7 +4,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <c:url value="/entrada?acao=RemoveEmpresa" var="excluir" />
 <c:url value="/entrada?acao=MostraEmpresa" var="mostra" />
-<c:url value="/formNovaEmpresa.jsp" var="formNovaEmpresa" />
+<c:url value="/entrada?acao=NovaEmpresaForm" var="formNovaEmpresa" />
 <fmt:formatDate var="dataDeAbertura" value="${dataDeAbertura}"/>
 
 <html>
@@ -15,23 +15,17 @@
     </head>
 
 		<body>
-		
-		
-			<c:if test="${not empty empresa}">
-				Empresa ${empresa} cadastrada com sucesso.
-				<br>
-				Cadastro realizado na data de: ${dataDeAbertura}
-			</c:if>
-               
+		              
             
             <h2>Lista de Empresas </h2>
 			<ul>
+				
 				<c:forEach items="${empresas}" var="empresa">
+					
 					<li>${empresa.nome} - <fmt:formatDate value="${empresa.dataAbertura}"/> 
 					
 					<a href="${mostra}&id=${empresa.id}"> editar </a> 
-					<a href="${excluir}&id=${empresa.id}"> excluir </a> 
-					
+					<a href="${excluir}&id=${empresa.id}"> excluir </a> 					
 					
 					</li>	
 							

@@ -19,7 +19,7 @@
 
 		Nome: <input type="text" name="nome">
 		<br> <br/> 
-		Data de Abertura: <input type="text" name="data">
+		Data de Abertura: <input type="text" name="data" placeholder="Formato: 01/08/2022">
 		
 		<input type="hidden" name="acao" value="NovaEmpresa">
 		

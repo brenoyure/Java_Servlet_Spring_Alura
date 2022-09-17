@@ -1,6 +1,7 @@
 package br.com.alura.gerenciador.acoes;
 
 import java.io.IOException;
+import java.util.NoSuchElementException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -27,10 +28,13 @@ public class RemoveEmpresa implements Acao {
 			// Após a exclusão, redirecionando o usuário de volta para a lista (servlet Entrada).
 			return "redirect:entrada?acao=ListaEmpresas";
 			
-		} catch (NumberFormatException e) {
+		} catch (NumberFormatException | NoSuchElementException e) {
 			/*
-			 * Caso o número da ID venha numa formato inválido ou em branco, Mostra uma msg
-			 * de erro no console e redireciona o usuário de volta para a lista.
+			 * Caso o número da ID venha numa formato inválido ou em branco, ou
+			 * 
+			 * Caso o método remove() não encontre a ID, 
+			 *  
+			 * Mostra uma msg de erro no console e redireciona o usuário de volta para a lista.
 			 */
 
 			System.err.println("Formato de Número Inválido.");

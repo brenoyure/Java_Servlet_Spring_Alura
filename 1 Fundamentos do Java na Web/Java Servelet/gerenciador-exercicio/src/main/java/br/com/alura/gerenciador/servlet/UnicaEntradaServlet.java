@@ -1,6 +1,7 @@
 package br.com.alura.gerenciador.servlet;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,10 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import br.com.alura.gerenciador.acoes.ListaEmpresas;
-import br.com.alura.gerenciador.acoes.MostraEmpresa;
-import br.com.alura.gerenciador.acoes.NovaEmpresa;
-import br.com.alura.gerenciador.acoes.RemoveEmpresa;
+import br.com.alura.gerenciador.acoes.Acao;
+
 
 @WebServlet("/entrada")
 public class UnicaEntradaServlet extends HttpServlet {
@@ -21,31 +20,27 @@ public class UnicaEntradaServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		String parametroAcao = request.getParameter("acao");
+		String nomeDaClasse = ("br.com.alura.gerenciador.acoes." + request.getParameter("acao"));
+		String nome;
+		String[] tipoEEndereco;
 		
-		switch (parametroAcao) {
-		
-		case "ListaEmpresas":
-			new ListaEmpresas().executa(request, response);
-			break;
-		
-		case "MostraEmpresa":
-			new MostraEmpresa().executa(request, response);
-			break;
+		try {
 			
-		case "NovaEmpresa":
-			new NovaEmpresa().executa(request, response);
-			break;
+			Acao acao = (Acao) Class.forName(nomeDaClasse).getDeclaredConstructor().newInstance();
+			nome = acao.executa(request, response);		
+			
+			tipoEEndereco = nome.split(":");
 
-		case "RemoveEmpresa":
-			new RemoveEmpresa().executa(request, response);
-			break;
+			if (tipoEEndereco[0].equals("forward"))
+				request.getRequestDispatcher("WEB-INF/view/" + tipoEEndereco[1]).forward(request, response);
 			
-		default:
-			response.sendRedirect("entrada?acao=ListaEmpresas");
-			break;
+			if (tipoEEndereco[0].equals("redirect"))
+				response.sendRedirect(tipoEEndereco[1]);
+			
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | SecurityException | ClassNotFoundException | NoSuchMethodException | InvocationTargetException e) {
+			System.err.println(e.getLocalizedMessage());
+			nome = "redirect:entrada?acao=ListaEmpresas";
 		}
-		
 		
 		
 	}

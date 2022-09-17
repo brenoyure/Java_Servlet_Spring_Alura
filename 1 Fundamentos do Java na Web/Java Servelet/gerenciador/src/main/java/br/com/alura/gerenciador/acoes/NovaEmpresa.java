@@ -34,7 +34,7 @@ public class NovaEmpresa implements Acao {
 			return "redirect:entrada?acao=ListaEmpresas";
 			
 			
-		} catch (IllegalArgumentException | ParseException e) {
+		} catch (IllegalArgumentException | ParseException | NullPointerException e) {
 			System.err.println(e.getLocalizedMessage());
 			return "redirect:entrada?acao=ListaEmpresas";
 		}

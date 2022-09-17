@@ -15,11 +15,11 @@
 				
 					<h3>Formulário para Abertura de Nova Empresa</h3>
 					
-					Nome: <input type="text" name="nome">
+					Nome: <input type="text" name="nome" placeholder="Nome da Empresa">
 					
 					<br><br/>
 					
-					Data de Abertura: <input type="text" name="data"/>
+					Data de Abertura: <input type="text" name="data" placeholder="Formato: 16/09/2022" />
 					
 					<input type="submit"/>
 				

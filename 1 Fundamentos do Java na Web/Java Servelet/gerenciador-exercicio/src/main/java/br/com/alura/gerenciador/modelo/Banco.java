@@ -2,8 +2,6 @@ package br.com.alura.gerenciador.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 public class Banco {
@@ -13,6 +11,7 @@ public class Banco {
 	private static List<Empresa> empresas = new ArrayList<>();
 
 	static {
+		
 		Empresa empresa = new Empresa();
 		empresa.setNome("Alura");
 		empresa.setId(identificadorUnico++);
@@ -34,8 +33,8 @@ public class Banco {
 		return Collections.unmodifiableList(Banco.empresas);
 	}
 
-	public static void ordenarLista() {
-		Banco.empresas.sort(null);
+	public boolean naoEstiverVazio() {
+		return !this.getEmpresas().isEmpty();
 	}
 	
 	public void remove(Integer id) {
@@ -46,7 +45,7 @@ public class Banco {
 
 	public Empresa buscaPeloID(Integer id) {
 		
-		return Banco.empresas.stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
+		return this.getEmpresas().stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
 		
 	}
 	
