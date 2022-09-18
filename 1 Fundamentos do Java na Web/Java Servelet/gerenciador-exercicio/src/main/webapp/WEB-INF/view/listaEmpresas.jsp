@@ -3,6 +3,7 @@
 <c:url value="/entrada?acao=RemoveEmpresa" var="remove" />
 <c:url value="/entrada?acao=MostraEmpresa" var="mostrar" />
 <c:url value="/entrada?acao=NovaEmpresaForm" var="formularioNovaEmpresa" />
+<c:url value="/entrada?acao=LoginForm" var="formularioLogin" />
  
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -23,10 +24,8 @@
 					
 						<li>${empresa} - ${data} - 
 						
-						 <p align="justify"><a href="${mostrar}&id=${empresa.id}">Editar</a> 
-						 <a href="${remove}&id=${empresa.id}">Remover</a> </p> 
-						
-						
+						 <p align="justify"><a href="${mostrar}&id=${empresa.id}"> Editar </a> 
+						 <a href="${remove}&id=${empresa.id}"> Remover </a> </p> 
 						
 						</li>
 					
@@ -35,12 +34,14 @@
 				
 				<c:if test="${not empty empresas}">
 					<h3>Outras Opções</h3>
-						<p>Para voltar ao Formulário de Nova Empresa clique <a href="${formularioNovaEmpresa}">aqui</a></p>
+						<p> Cadastre uma Nova Empresa clicando <a href="${formularioNovaEmpresa}">aqui</a></p>
+						<p> Ou <a href="${formularioLogin}">aqui</a> para sair</p>
 				</c:if>
 				
 				<c:if test="${empty empresas}">
 					<p> Nenhuma Empresa Encontrada. </p>
 					<p> Cadastre uma nova clicando <a href="${formularioNovaEmpresa}">aqui</a></p>
+					<p> Ou clique <a href="${formularioLogin}">aqui</a> para sair</p>
 				</c:if>
 		
 

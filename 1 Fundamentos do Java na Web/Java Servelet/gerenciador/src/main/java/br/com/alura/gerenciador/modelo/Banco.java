@@ -2,13 +2,13 @@ package br.com.alura.gerenciador.modelo;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Date;
 import java.util.List;
 
 public class Banco {
 
 	private static Integer numeroIdentificador = 1;
 	private static List<Empresa> empresas = new ArrayList<>();
+	private static List<Usuario> usuarios = new ArrayList<>();
 
 	static {
 
@@ -22,6 +22,17 @@ public class Banco {
 
 		empresas.add(empresa);
 		empresas.add(empresa2);
+		
+		Usuario u1 = new Usuario();
+		u1.setLogin("brenoyure");
+		u1.setSenha("cstrike");
+		
+		Usuario u2 = new Usuario();
+		u2.setLogin("inacio");
+		u2.setSenha("12345");
+		
+		usuarios.add(u1);
+		usuarios.add(u2);
 
 	}
 
@@ -51,18 +62,11 @@ public class Banco {
 		return Banco.empresas.stream().filter(e -> e.getId() == id).findFirst().orElseThrow();
 
 	}
-
-	public void editarEmpresaPeloID(Integer id, String nomeDaEmpresa, Date dataDeAbertura) {
-
-		try {
-			Empresa empresa = this.buscaEmpresaPelaID(id);
-			empresa.setNome(nomeDaEmpresa);
-			empresa.setDataAbertura(dataDeAbertura);
-
-		} catch (NullPointerException e) {
-			System.err.println("Empresa não encontrada.");
-		}
-
+	
+	public Usuario existeUsuario(String login, String senha) {
+		
+		return Banco.usuarios.stream().filter(u -> u.ehIgual(login, senha)).findFirst().orElse(null);
+		
 	}
 
 }
