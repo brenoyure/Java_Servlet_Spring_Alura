@@ -19,10 +19,11 @@
 		Login: <input type="text" name="login">
 		<br> <br/> 
 		Senha: <input type="password" name="senha">
-		
 		<input type="hidden" name="acao" value="Login">
 		
-		<input type="submit"/>
+		<br> <br/> 
+		
+		<input type="submit" value="Entrar" />
 
 
 	</form>

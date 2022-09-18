@@ -3,7 +3,8 @@
 <c:url value="/entrada?acao=RemoveEmpresa" var="remove" />
 <c:url value="/entrada?acao=MostraEmpresa" var="mostrar" />
 <c:url value="/entrada?acao=NovaEmpresaForm" var="formularioNovaEmpresa" />
-<c:url value="/entrada?acao=LoginForm" var="formularioLogin" />
+<c:import url="logout-parcial.jsp" var="logout"/>
+
  
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -15,6 +16,15 @@
 	
 	</head>
 		<body>
+			
+			<c:if test="${not empty usuarioLogado}">
+				Usuário logado: ${usuarioLogado.login} ${logout }
+			</c:if>
+			
+			
+			<c:if test="${empty usuarioLogado}">
+				Nenhum Usuário logado
+			</c:if>
 			
 
 			<h2>Lista das Empresas</h2>
@@ -35,13 +45,11 @@
 				<c:if test="${not empty empresas}">
 					<h3>Outras Opções</h3>
 						<p> Cadastre uma Nova Empresa clicando <a href="${formularioNovaEmpresa}">aqui</a></p>
-						<p> Ou <a href="${formularioLogin}">aqui</a> para sair</p>
 				</c:if>
 				
 				<c:if test="${empty empresas}">
 					<p> Nenhuma Empresa Encontrada. </p>
 					<p> Cadastre uma nova clicando <a href="${formularioNovaEmpresa}">aqui</a></p>
-					<p> Ou clique <a href="${formularioLogin}">aqui</a> para sair</p>
 				</c:if>
 		
 

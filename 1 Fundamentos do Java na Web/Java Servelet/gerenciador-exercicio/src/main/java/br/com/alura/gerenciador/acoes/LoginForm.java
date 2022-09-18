@@ -10,7 +10,14 @@ public class LoginForm implements Acao {
 
 	@Override
 	public String executa(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		return "forward:formLogin.jsp";
+		
+		boolean usuarioNaoEstiverLogado = (request.getSession().getAttribute("usuarioLogado") == null);
+		
+		if (usuarioNaoEstiverLogado)
+			return "forward:formLogin.jsp";
+		
+		return "redirect:entrada?acao=ListaEmpresas";
+		
 	}
 
 }

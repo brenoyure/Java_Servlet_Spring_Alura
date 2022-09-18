@@ -56,7 +56,7 @@ public class Banco {
 
 	}
 
-	private static Usuario buscaPeloUsuario(String login, String senha) {
+	public static Usuario buscaPeloUsuario(String login, String senha) {
 		
 		return Banco.usuarios.stream().filter(u -> u.ehIgual(login, senha)).findFirst().orElse(null);
 	}

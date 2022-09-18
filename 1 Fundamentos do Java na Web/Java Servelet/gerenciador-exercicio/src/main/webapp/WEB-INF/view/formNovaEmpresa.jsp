@@ -11,6 +11,8 @@
 	</head>
 			<body>
 			
+			Usuário logado: ${usuarioLogado.login} <c:import url="logout-parcial.jsp" />
+			
 				<form action="${linkServletNovaEmpresa}" method="post">
 				
 					<h3>Formulário para Abertura de Nova Empresa</h3>

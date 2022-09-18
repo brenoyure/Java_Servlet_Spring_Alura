@@ -5,7 +5,7 @@
 <c:url value="/entrada?acao=RemoveEmpresa" var="excluir" />
 <c:url value="/entrada?acao=MostraEmpresa" var="mostra" />
 <c:url value="/entrada?acao=NovaEmpresaForm" var="formNovaEmpresa" />
-<c:url value="/entrada?acao=LoginForm" var="formLogin" />
+<c:url value="/entrada?acao=Logout" var="logout" />
 
 <fmt:formatDate var="dataDeAbertura" value="${dataDeAbertura}"/>
 
@@ -17,7 +17,15 @@
     </head>
 
 		<body>
-		              
+		    
+		    <c:if test="${not empty usuarioLogado.login}">
+		    	Usuário logado: ${usuarioLogado.login} 
+		    </c:if>         
+
+		    <c:if test="${empty usuarioLogado.login}">
+		    	Nenhum Usuário Logado. 
+		    </c:if>         
+            
             
             <h2>Lista de Empresas </h2>
 			<ul>
@@ -32,22 +40,23 @@
 					</li>	
 							
 				</c:forEach>
+				
 			</ul>
 			
 			<c:if test="${not empty empresas}"> 
 				
 				<h3>Outras Opções</h3>
 				<p> Para voltar para o formulário clique <a href="${formNovaEmpresa}">aqui</a>.</p>
-				<p> Para sair clique <a href="${formLogin}">aqui</a>.</p>
+				<p> Para sair clique <a href="${logout}">aqui</a>.</p>
 			
 			</c:if>
 			
 			
 			<c:if test="${empty empresas}"> 
 				
-				<p>Nenhuma Empresa encontrada.</p>
+				<p> Nenhuma Empresa encontrada.</p>
 				<p> Para cadastrar uma nova clique <a href="${formNovaEmpresa}">aqui</a>.</p>
-				<p> Para sair clique <a href="${formLogin}">aqui</a>.</p>
+				<p> Para sair clique <a href="${logout}">aqui</a>.</p>
 			
 			</c:if>
 			
