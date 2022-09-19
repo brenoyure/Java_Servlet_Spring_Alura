@@ -17,6 +17,46 @@
   	<url-pattern>/ListaEmpresas</url-pattern>
   	<url-pattern>/ListarEmpresas</url-pattern>
   	<url-pattern>/ListaDeEmpresas</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
+
+
+  <!--COMEÇO do Monitoramento Filter -->	
+  <filter>
+	<filter-name>MonitoramentoFilter</filter-name>
+	<filter-class>br.com.alura.gerenciador.servlet.MonitoramentoFilter</filter-class>  
+  </filter>
+  
+  <filter-mapping>
+	<filter-name>MonitoramentoFilter</filter-name>
+	<url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <!--FIM do Monitoramento Filter -->
+  
+  
+  <!-- COMEÇO do Autenticação Filter -->
+  <filter>
+	<filter-name>AutenticacaoFilter</filter-name>
+	<filter-class>br.com.alura.gerenciador.servlet.AutenticacaoFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+	<filter-name>AutenticacaoFilter</filter-name>
+	<url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <!-- FIM do Autenticação Filter -->
+  
+  
+  <!-- COMEÇO do Controlador Filter -->
+  <filter>
+	<filter-name>ControladorFilter</filter-name>
+	<filter-class>br.com.alura.gerenciador.servlet.ControladorFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+	<filter-name>ControladorFilter</filter-name>
+	<url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <!-- FIM do Controlador Filter -->
+  
   
 </web-app>

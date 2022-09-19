@@ -15,6 +15,46 @@
   <servlet-mapping>
   	<servlet-name>OiMundo</servlet-name>
   	<url-pattern>/ola</url-pattern>
-  </servlet-mapping> 
+  </servlet-mapping>
+
+
+  <!-- COMEÇO Autorização Filter -->
+  <filter>
+  	<filter-name>AutorizacaoFilter</filter-name>
+  	<filter-class>br.com.alura.gerenciador.servlet.AutorizacaoFilter</filter-class>
+  </filter>
   
+  <filter-mapping>
+  	<filter-name>AutorizacaoFilter</filter-name>
+  	<url-pattern>/entrada</url-pattern>
+  </filter-mapping>
+  <!-- FIM Autorização Filter -->
+
+  
+  <!-- COMEÇO Monitoramento Filter -->
+  <filter>
+	<filter-name>MonitoramentoFilter</filter-name>
+	<filter-class>br.com.alura.gerenciador.servlet.MonitoramentoFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+  	<filter-name>MonitoramentoFilter</filter-name>
+  	<url-pattern>/entrada</url-pattern>  
+  </filter-mapping>
+  <!-- FIM Monitoramento Filter -->
+  
+
+  <!-- COMEÇO Controlador Filter -->
+  <filter>
+	<filter-name>ControladorFilter</filter-name>
+	<filter-class>br.com.alura.gerenciador.servlet.ControladorFilter</filter-class>
+  </filter>
+  
+  <filter-mapping>
+	<filter-name>ControladorFilter</filter-name>
+	<url-pattern>/entrada</url-pattern>
+  </filter-mapping> 	
+  <!-- FIM Controlador Filter -->  
+    
+
 </web-app>
