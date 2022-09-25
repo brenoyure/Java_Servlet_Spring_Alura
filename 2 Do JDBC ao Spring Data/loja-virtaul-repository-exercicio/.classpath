@@ -11,5 +11,15 @@
 			<attribute name="module" value="true"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="/lojva-virtual-respository/lib/c3p0-0.9.5.4.jar" sourcepath="D:/Breno/Programação/Java/Alura Cursos/Cursos_Spring_Alura/2 Do JDBC ao Spring Data/lojva-virtual-respository/lib/src/c3p0-0.9.5.4-sources.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="/lojva-virtual-respository/lib/mchange-commons-java-0.2.16.jar">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
