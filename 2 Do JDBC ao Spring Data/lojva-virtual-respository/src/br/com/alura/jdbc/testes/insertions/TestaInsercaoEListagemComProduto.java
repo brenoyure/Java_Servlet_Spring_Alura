@@ -20,7 +20,7 @@ public class TestaInsercaoEListagemComProduto {
 //			produtoDao.salvar(galaxyA52s);
 			List<Produto> listaDeProdutos = produtoDao.listar();
 
-			listaDeProdutos.stream().filter(p -> p.getNome().contains("Smartphone")).forEach(System.out::println);
+			listaDeProdutos.stream().forEach(lp -> System.out.println(lp));
 			
 			
 		}

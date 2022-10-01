@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import br.com.alura.jdbc.modelo.Categoria;
 import br.com.alura.jdbc.modelo.Produto;
 
 public class ProdutoDAO {
@@ -64,5 +65,30 @@ public class ProdutoDAO {
 
 		return Collections.unmodifiableList(produtos);
 	}
+
+    public List<Produto> buscar(Categoria categoria) throws SQLException {
+        List<Produto> produtos = new ArrayList<>();
+
+        String sql = "SELECT * FROM produto WHERE CATEGORIA_ID = ?";
+
+        try (PreparedStatement pstm = connection.prepareStatement(sql)) {
+            pstm.setInt(1, categoria.getId());
+            pstm.execute();
+
+            try (ResultSet rst = pstm.getResultSet()) {
+                
+                while(rst.next()) {
+                    Produto produto = 
+                            new Produto(rst.getInt(1), rst.getString(2), rst.getString(3));
+                    produtos.add(produto);
+                }
+                
+
+            }
+
+        }
+        
+        return produtos;
+    }
 
 }
