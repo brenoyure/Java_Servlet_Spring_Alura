@@ -13,8 +13,8 @@ public class CadastroDeProduto {
 
 	public static void main(String[] args) {
 
-		Categoria celulares = new Categoria("Celulares");
-		Produto celular = new Produto("Motorola Moto x4", "32GB", new BigDecimal("1400"), celulares);
+		Categoria celulares = new Categoria("Video Game");
+		Produto celular = new Produto("PlayStation 5", "2 Controles", new BigDecimal("4000"), celulares);
 
 		
 		EntityManager em = JPAUtil.getEntityManager();

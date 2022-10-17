@@ -16,10 +16,10 @@ public class ItemPedido {
 
 	private Integer quantidade;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Produto produto;
 
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Pedido pedido;
 
 	public ItemPedido() {

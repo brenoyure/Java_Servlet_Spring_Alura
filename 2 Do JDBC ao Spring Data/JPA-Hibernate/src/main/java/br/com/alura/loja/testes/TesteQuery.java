@@ -17,9 +17,9 @@ public class TesteQuery {
 		ProdutoDao dao = new ProdutoDao(em);
 
 		List<Produto> produtos = dao.buscarPelaCategoria("celular");
-		produtos.forEach(p -> System.out.println(p.getNome()));
-
 		BigDecimal preco = dao.buscarPrecoDoProdutoComNome("Samsung");
+
+		produtos.forEach(p -> System.out.println(p.getNome()));
 		System.out.println(preco);
 
 	}

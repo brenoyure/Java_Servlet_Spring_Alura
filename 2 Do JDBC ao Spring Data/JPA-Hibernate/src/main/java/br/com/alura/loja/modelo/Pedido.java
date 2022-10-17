@@ -1,5 +1,7 @@
 package br.com.alura.loja.modelo;
 
+import static java.util.Collections.unmodifiableList;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +28,11 @@ public class Pedido {
 
 	private LocalDate data = LocalDate.now();
 
-	@ManyToOne
+	/**
+	 * Colocamos o FetchType como Lazy, para que a JPA não carregue a entidade cliente sem necessidade
+	 * Lazy é necessário no caso de relacionamento OneToOne ou ManyToOne
+	 */
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Cliente cliente;
 
 	@Column(name = "valor_total")
@@ -43,6 +50,10 @@ public class Pedido {
 		this.itens.add(item);
 		this.valorTotal = this.valorTotal.add(item.getValor());
 		
+	}
+	
+	public List<ItemPedido> getItens() {
+		return unmodifiableList(itens);
 	}
 
 	@SuppressWarnings("unused")

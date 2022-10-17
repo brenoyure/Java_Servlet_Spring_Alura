@@ -1,4 +1,4 @@
-package br.com.alura.loja.dto;
+package br.com.alura.loja.modelo;
 
 import java.time.LocalDate;
 
@@ -6,11 +6,11 @@ public class RelatorioVendasVO {
 
 	private String nomeProduto;
 
-	private Integer quantidadeVendida;
+	private Long quantidadeVendida;
 
 	private LocalDate dataUltimaVenda;
-
-	public RelatorioVendasVO(String nomeProduto, Integer quantidadeVendida, LocalDate dataUltimaVenda) {
+	
+	public RelatorioVendasVO(String nomeProduto, Long quantidadeVendida, LocalDate dataUltimaVenda) {
 		this.nomeProduto = nomeProduto;
 		this.quantidadeVendida = quantidadeVendida;
 		this.dataUltimaVenda = dataUltimaVenda;
@@ -20,7 +20,7 @@ public class RelatorioVendasVO {
 		return nomeProduto;
 	}
 
-	public Integer getQuantidadeVendida() {
+	public Long getQuantidadeVendida() {
 		return quantidadeVendida;
 	}
 
