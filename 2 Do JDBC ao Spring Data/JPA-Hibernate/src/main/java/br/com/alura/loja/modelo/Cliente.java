@@ -1,5 +1,6 @@
 package br.com.alura.loja.modelo;
 
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -14,16 +15,16 @@ public class Cliente {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nome;
-	private String cpf;
+	@Embedded
+	private DadosPessoais dadosPessoais;
+	
 
 	public Cliente() {
 
 	}
-
+	
 	public Cliente(String nome, String cpf) {
-		this.nome = nome;
-		this.cpf = cpf;
+		this.dadosPessoais = new DadosPessoais(nome, cpf);
 	}
 
 	public Long getId() {
@@ -33,21 +34,17 @@ public class Cliente {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
+	
 	public String getNome() {
-		return nome;
-	}
-
-	public void setNome(String nome) {
-		this.nome = nome;
+		return dadosPessoais.getNome();
 	}
 
 	public String getCpf() {
-		return cpf;
+		return dadosPessoais.getCpf();
 	}
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
+	public DadosPessoais getDadosPessoais() {
+		return dadosPessoais;
 	}
 
 }

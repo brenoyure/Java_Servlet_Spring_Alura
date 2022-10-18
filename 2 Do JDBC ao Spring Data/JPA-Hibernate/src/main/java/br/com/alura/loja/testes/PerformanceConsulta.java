@@ -1,6 +1,7 @@
 package br.com.alura.loja.testes;
 
 import br.com.alura.loja.dao.PedidoDao;
+import br.com.alura.loja.modelo.Cliente;
 import br.com.alura.loja.modelo.Pedido;
 import br.com.alura.loja.util.JPAUtil;
 import jakarta.persistence.EntityManager;
@@ -17,7 +18,9 @@ public class PerformanceConsulta {
 		
 		em.close();
 		
-		System.out.println(pedido.getCliente().getNome());
+		Cliente c = pedido.getCliente();
+		
+		System.out.printf("Cliente %s de CPF %s \n", c.getNome(), c.getCpf());
 		
 		
 	}
