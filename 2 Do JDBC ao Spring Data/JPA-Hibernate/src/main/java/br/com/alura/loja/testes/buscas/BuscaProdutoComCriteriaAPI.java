@@ -1,4 +1,4 @@
-package br.com.alura.loja.testes;
+package br.com.alura.loja.testes.buscas;
 
 import static br.com.alura.loja.util.JPAUtil.getEntityManager;
 
@@ -20,12 +20,15 @@ public class BuscaProdutoComCriteriaAPI {
 		
 		ProdutoDao dao = new ProdutoDao(em);
 		
+//		List<Produto> produtos = dao
+//				.buscarTodosComCriteriaAPI(
+//						"PlayStation 5", new BigDecimal("4000"), LocalDate.of(2022, Month.OCTOBER, 17));
 		List<Produto> produtos = dao
 				.buscarTodosComCriteriaAPI(
-						"PlayStation 5", new BigDecimal("4000"), LocalDate.of(2022, Month.OCTOBER, 17));
+						"Computador", null, null);
 		
-		produtos.forEach(p -> System.out.printf("%s \n", p.getNome()));
-//		produtos.forEach(p -> System.out.printf("%s, %s, %s \n", p.getNome(), p.getDescricao(), p.getCategoria().getNome()));
+//		produtos.forEach(p -> System.out.printf("%s \n", p.getNome()));
+		produtos.forEach(p -> System.out.printf("%s, %s, %s \n", p.getNome(), p.getDescricao(), p.getCategoria().getNome()));
 		
 		
 

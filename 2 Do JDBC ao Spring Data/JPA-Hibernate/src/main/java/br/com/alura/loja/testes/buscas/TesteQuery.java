@@ -1,4 +1,4 @@
-package br.com.alura.loja.testes;
+package br.com.alura.loja.testes.buscas;
 
 import static br.com.alura.loja.util.JPAUtil.getEntityManager;
 
@@ -16,11 +16,11 @@ public class TesteQuery {
 		EntityManager em = getEntityManager();
 		ProdutoDao dao = new ProdutoDao(em);
 
-		List<Produto> produtos = dao.buscarPelaCategoria("celular");
-		BigDecimal preco = dao.buscarPrecoDoProdutoComNome("Samsung");
+		List<Produto> produtos = dao.buscarPelaCategoria("Informatica");
+//		BigDecimal preco = dao.buscarPrecoDoProdutoComNome("Samsung");
 
-		produtos.forEach(p -> System.out.println(p.getNome()));
-		System.out.println(preco);
+		produtos.forEach(p -> System.out.println(p.getNome() + p.getCategoria().getNome() + p.getDescricao()));
+//		System.out.println(preco);
 
 	}
 

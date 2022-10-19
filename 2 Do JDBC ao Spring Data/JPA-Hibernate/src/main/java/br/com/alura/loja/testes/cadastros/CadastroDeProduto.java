@@ -1,4 +1,4 @@
-package br.com.alura.loja.testes;
+package br.com.alura.loja.testes.cadastros;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package br.com.alura.loja.testes;
+package br.com.alura.loja.testes.buscas;
 
 import static br.com.alura.loja.util.JPAUtil.getEntityManager;
 

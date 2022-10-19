@@ -1,4 +1,4 @@
-package br.com.alura.loja.testes;
+package br.com.alura.loja.testes.cadastros;
 
 import br.com.alura.loja.dao.ClienteDao;
 import br.com.alura.loja.dao.PedidoDao;
