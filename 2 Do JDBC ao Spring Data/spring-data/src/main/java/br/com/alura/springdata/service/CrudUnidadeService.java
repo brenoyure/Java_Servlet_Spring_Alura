@@ -13,7 +13,7 @@ import br.com.alura.springdata.repository.UnidadeRepository;
 @Service
 public class CrudUnidadeService {
 
-    private UnidadeRepository unidadeRepository;
+    private final UnidadeRepository unidadeRepository;
 
     public CrudUnidadeService(UnidadeRepository unidadeRepository) {
         this.unidadeRepository = unidadeRepository;
@@ -31,6 +31,7 @@ public class CrudUnidadeService {
             System.out.println("2 - Atualizar");
             System.out.println("3 - Exibir Todos");
             System.out.println("4 - Deletar");
+            System.out.println("\n================================\n");
 
             int action = scanner.nextInt();
 

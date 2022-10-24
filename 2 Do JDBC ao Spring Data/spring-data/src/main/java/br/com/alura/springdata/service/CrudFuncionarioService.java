@@ -4,6 +4,10 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Scanner;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import br.com.alura.springdata.orm.Cargo;
@@ -39,6 +43,7 @@ public class CrudFuncionarioService {
             System.out.println("2 - Atualizar");
             System.out.println("3 - Visualizar");
             System.out.println("4 - Deletar");
+            System.out.println("\n====================================\n");
 
             int action = scanner.nextInt();
 
@@ -51,7 +56,7 @@ public class CrudFuncionarioService {
                     break;
 
                 case 3:
-                    visualizar();
+                    visualizar(scanner);
                     break;
 
                 case 4:
@@ -77,8 +82,19 @@ public class CrudFuncionarioService {
 
     }
 
-    private void visualizar() {
-        Iterable<Funcionario> funcionarios = funcionarioRepository.findAll();
+    private void visualizar(Scanner scanner) {
+        System.out.println("Qual página deseja visualizar?");
+        Integer page = scanner.nextInt();
+        
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(Sort.Direction.ASC, "dadosPessoais.nome"));
+        
+        Page<Funcionario> funcionarios = funcionarioRepository.findAll(pageable);
+        
+        System.out.println(funcionarios);
+        System.out.println("Página atual " + funcionarios.getNumber());
+        
+        System.out.println("Total de elementos: " + funcionarios.getTotalElements());
+                
         funcionarios.forEach(f -> System.out.printf("ID: %d %s, %s, %s \n", f.getId(), f.getDadosPessoais().getNome(),
                 f.getCargo().getDescricao(), f.getUnidadeTrabalho().getDescricao()));
     }
